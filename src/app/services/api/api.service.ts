@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from "rxjs/operators";
 import { GetAllCategoriesResponse } from './types/get-all-categories.response';
+import { GetProductsByCategoryResponse } from './types/get-products-by-category.response';
 
 const defaultHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -17,14 +18,21 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    getAllCategories() {
-        return this.http.get<GetAllCategoriesResponse>('https://fakestoreapi.com/products/categories',{headers : defaultHeaders})
-            .pipe(
-                catchError((error) => {
-                    console.error(error)
+    private cache$ = new Map<string, Observable<unknown>>()
 
-                    return throwError(() => new Error('Something bad happened; please try again later.'));
-                })
-            )
+    getAllCategories(refetch = false) {
+        if(!this.cache$.get('categories') || refetch){
+            this.cache$.set('categories', this.http.get('https://fakestoreapi.com/products/categories',{headers : defaultHeaders}))
+        }
+
+        return this.cache$.get('categories') as Observable<GetAllCategoriesResponse>
+    }
+
+    getProductsByCategory(category: string, refetch = false) {
+        if(!this.cache$.get(`${category}-products`) || refetch){
+            this.cache$.set(`${category}-products`, this.http.get(`https://fakestoreapi.com/products/category/${category}`,{headers : defaultHeaders}))
+        }
+
+        return this.cache$.get(`${category}-products`) as Observable<GetProductsByCategoryResponse>
     }
 }

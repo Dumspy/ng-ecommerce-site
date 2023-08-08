@@ -1,3 +1,6 @@
 <p>{{_category}} works!</p>
 <p>{{validCategory}}</p>
 <div class="animate-spin w-16 h-16 bg-blue-500" *ngIf="loading"></div>
+<div *ngIf="products">
+    {{products | json}}
+</div>
