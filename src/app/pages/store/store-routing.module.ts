@@ -5,7 +5,7 @@ import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
     { path: '', component: StoreComponent, children: [
-            { path: 'tshirts', component: CategoryComponent, data: {categoryTitle: 'tshirt'} }
+            { path: ':category', component: CategoryComponent }
         ]
     },
 ];
@@ -14,4 +14,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class StoreRoutingModule { }
