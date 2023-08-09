@@ -1,6 +1,8 @@
-<p>{{_category}} works!</p>
-<p>{{validCategory}}</p>
-<div class="animate-spin w-16 h-16 bg-blue-500" *ngIf="loading"></div>
-<div *ngIf="products">
-    {{products | json}}
+<h2 class="ml-4 font-bold text-3xl">{{_category | capitalize}}</h2>
+<div class="animate-spin w-16 h-16 bg-blue-500 rounded-full" *ngIf="loading">
+    <div class="relative w-2 h-1/2 bg-slate-700 m-auto"></div>
 </div>
+<div *ngIf="!loading && products" class="grid grid-cols-5 gap-4 m-4">
+    <app-item *ngFor="let product of products" [product]="product"/>
+</div>
+<p *ngIf="!loading && !validCategory">invalid category</p>

@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Product } from 'src/app/services/api/types/product.type';
-import { Observable } from 'rxjs';
+import { ItemComponent } from "./item/item.component";
+import { CapitalizePipe } from "../../../pipes/capitalize.pipe";
 
 @Component({
     selector: 'app-category',
     standalone: true,
-    imports: [CommonModule, RouterModule],
     templateUrl: './category.component.html',
+    imports: [CommonModule, RouterModule, ItemComponent, CapitalizePipe]
 })
 export class CategoryComponent {
     _category!: string
