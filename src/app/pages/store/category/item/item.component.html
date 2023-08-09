@@ -4,6 +4,6 @@
     <p class="text-slate-600 text-base">{{product.description}}</p>
     <div class="flex flex-row justify-between items-end">
         <p>{{product.price | currency}}</p>
-        <button class="bg-blue-500 hover:bg-blue-700 text-slate-200 font-bold py-2 px-4 rounded">Add to cart</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-slate-200 font-bold py-2 px-4 rounded" (click)="addToCart()">Add to cart</button>
     </div>
 <article>
