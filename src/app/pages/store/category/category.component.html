@@ -2,7 +2,7 @@
 <div class="animate-spin w-16 h-16 bg-blue-500 rounded-full" *ngIf="loading">
     <div class="relative w-2 h-1/2 bg-slate-700 m-auto"></div>
 </div>
-<div *ngIf="!loading && products" class="grid grid-cols-5 gap-4 m-4">
+<section *ngIf="!loading && products" class="grid grid-cols-5 gap-4 m-4">
     <app-item *ngFor="let product of products" [product]="product"/>
-</div>
+</section>
 <p *ngIf="!loading && !validCategory">invalid category</p>
