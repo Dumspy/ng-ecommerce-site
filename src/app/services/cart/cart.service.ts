@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../api/types/product.type';
+import { BehaviorSubject, map } from 'rxjs';
 
-type cartItem = Pick<Product, 'id' | 'title' | 'price' | 'image'> & { quantity: number };
+export type cartItem = Pick<Product, 'id' | 'title' | 'price' | 'image'> & { quantity: number };
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class CartService {
-    items: cartItem[] = [];
-
-    constructor() { }
+    private cart$ = new BehaviorSubject<cartItem[]>([]);
 
     addToCart(product: Product) {
-        const item = this.items.find((item) => item.id === product.id);
+        const cart = [...this.cart$.getValue()]
+        const item = cart.find((item) => item.id === product.id);
 
         if (item) {
             item.quantity++;
         } else {
-            this.items.push({
+            cart.push({
                 id: product.id,
                 title: product.title,
                 price: product.price,
@@ -26,37 +26,51 @@ export class CartService {
                 quantity: 1
             });
         }
+
+        this.cart$.next(cart);
     }
 
     setQuantity(product: Product, quantity: number) {
-        const item = this.items.find((item) => item.id === product.id);
+        const cart = [...this.cart$.getValue()]
+        const item = cart.find((item) => item.id === product.id);
 
-        if (item) {
-            if (quantity === 0) {
-                this.removeItem(product);
-                return;
-            }
-            item.quantity = quantity;
+        if (!item) { return }
+        if (quantity === 0) {
+            this.removeItem(product);
+            return;
         }
+
+        item.quantity = quantity;
+
+        this.cart$.next(cart);
     }
 
     clearCart() {
-        this.items = [];
+        this.cart$.next([]);
     }
 
     removeItem(product: Product) {
-       this.items = this.items.filter((item) => item.id !== product.id);
+        const cart = [...this.cart$.getValue()]
+        const item = cart.find((item) => item.id === product.id);
+
+        if (!item) { return }
+
+        this.cart$.next(cart.filter((item) => item.id !== product.id))
     }
 
-    getTotalItems() {
-        return this.items.reduce((acc, item) => acc + item.quantity, 0);
+    getQuantity() {
+        return this.cart$.pipe(
+            map((items) => items.reduce((acc, item) => acc + item.quantity, 0))
+        );
     }
 
-    getTotalPrice() {
-        return this.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    getTotal() {
+        return this.cart$.pipe(
+            map((items) => items.reduce((acc, item) => acc + item.price * item.quantity, 0))
+        );
     }
 
     getItems() {
-        return this.items;
+        return this.cart$.asObservable();
     }
 }

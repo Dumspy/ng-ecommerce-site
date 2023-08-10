@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CartService } from './services/cart/cart.service';
 
@@ -10,8 +10,6 @@ import { CartService } from './services/cart/cart.service';
 export class AppComponent {
     currentRoute!: string
 
-    cartService = inject(CartService)
-
     constructor(private router: Router) {
         this.router.events.subscribe((event) => {
             if(event instanceof NavigationEnd) {
@@ -20,9 +18,5 @@ export class AppComponent {
                 this.currentRoute = baseRoute
             }
         })
-    }
-
-    openCart(){
-        console.log(this.cartService.getItems())
     }
 }

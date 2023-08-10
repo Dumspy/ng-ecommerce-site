@@ -1,0 +1,16 @@
+<div *ngIf="!hidden" [@slideInOut] class="absolute top-0 right-0 w-96 min-h-screen border-l bg-white">
+    <div class="flex justify-between items-center px-4 py-2 border-b">
+        <p class="text-xl font-bold">Cart</p>
+        <button (click)="toggle()" class="text-xl font-bold">&times;</button>
+    </div>
+    <p *ngIf="((quantity | async) || -1) < 0">Your cart is empty</p>
+    <app-cart-item *ngFor="let item of cart | async" [item]="item"></app-cart-item>
+    <div class="flex justify-between items-center px-4 py-2 border-t">
+        <p class="text-xl font-bold">Total</p>
+        <p class="text-xl font-bold">{{total | async | currency}}</p>
+    </div>
+    <div>
+        <button class="w-full py-2 bg-green-500 text-white font-bold">Checkout</button>
+        <button class="w-full py-2 text-black font-bold" (click)="cartService.clearCart()">Clear Cart</button>
+    </div>
+</div>

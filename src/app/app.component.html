@@ -15,7 +15,8 @@
                 </li>
             </ul>
         </div>
-        <button class="mr-4" (click)="openCart()">Cart</button>
+        <button class="mr-4" (click)="drawer.toggle()">Cart</button>
     </nav>
+    <app-cart-drawer #drawer></app-cart-drawer>
     <router-outlet></router-outlet>
 </div>
