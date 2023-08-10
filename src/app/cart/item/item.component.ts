@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { cartItem } from 'src/app/services/cart/cart.service';
+import { CartService, cartItem } from 'src/app/services/cart/cart.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -12,4 +12,6 @@ import { cartItem } from 'src/app/services/cart/cart.service';
 })
 export class ItemComponent {
     @Input() item!: cartItem
+
+    cartService = inject(CartService)
 }

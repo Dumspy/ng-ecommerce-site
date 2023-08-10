@@ -4,7 +4,10 @@
         <button (click)="toggle()" class="text-xl font-bold" aria-label="Close cart">&times;</button>
     </div>
     <p *ngIf="((quantity | async) || -1) < 0">Your cart is empty</p>
-    <app-cart-item *ngFor="let item of cart | async" [item]="item"></app-cart-item>
+    <ng-container *ngFor="let item of cart | async; let i = index">
+        <app-cart-item [item]="item"></app-cart-item>
+        <hr *ngIf="i !== (cart | async)?.length">
+    </ng-container>
     <div class="flex justify-between items-center px-4 py-2 border-t">
         <p class="text-xl font-bold">Total</p>
         <p class="text-xl font-bold">{{total | async | currency}}</p>

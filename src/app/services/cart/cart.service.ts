@@ -30,13 +30,13 @@ export class CartService {
         this.cart$.next(cart);
     }
 
-    setQuantity(product: Product, quantity: number) {
+    setQuantity(id: number, quantity: number) {
         const cart = [...this.cart$.getValue()]
-        const item = cart.find((item) => item.id === product.id);
+        const item = cart.find((item) => item.id === id);
 
         if (!item) { return }
         if (quantity === 0) {
-            this.removeItem(product);
+            this.removeItem(id);
             return;
         }
 
@@ -49,13 +49,13 @@ export class CartService {
         this.cart$.next([]);
     }
 
-    removeItem(product: Product) {
+    removeItem(id: number) {
         const cart = [...this.cart$.getValue()]
-        const item = cart.find((item) => item.id === product.id);
+        const item = cart.find((item) => item.id === id);
 
         if (!item) { return }
 
-        this.cart$.next(cart.filter((item) => item.id !== product.id))
+        this.cart$.next(cart.filter((item) => item.id !== id))
     }
 
     getQuantity() {
