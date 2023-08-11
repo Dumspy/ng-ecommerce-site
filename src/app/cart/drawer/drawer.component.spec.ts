@@ -30,7 +30,7 @@ describe('DrawerComponent', () => {
     })
 
     it('should display the drawer when hidden is false', () => {
-        component.hidden = true;
+        component.hidden = false;
         fixture.detectChanges();
 
         const drawer = fixture.nativeElement.querySelector('*');
