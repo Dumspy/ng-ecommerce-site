@@ -10,4 +10,14 @@ describe('CapitalizePipe', () => {
         const pipe = new CapitalizePipe();
         expect(pipe.transform('test')).toBe('Test');
     });
+
+    it('should return the same string if it is already capitalized', () => {
+        const pipe = new CapitalizePipe();
+        expect(pipe.transform('Test')).toBe('Test');
+    });
+
+    it('should return the same string if it is empty', () => {
+        const pipe = new CapitalizePipe();
+        expect(pipe.transform('')).toBe('');
+    });
 });

@@ -5,6 +5,7 @@ on:
     paths:
     - "src/**"
     - ".github/workflows/testing.yml"
+    - "package.json"
 jobs:
   test:
     runs-on: ubuntu-latest
