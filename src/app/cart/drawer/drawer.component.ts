@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ItemComponent } from "../item/item.component";
