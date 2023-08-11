@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ItemComponent } from './item.component';
 
-describe('ItemComponent', () => {
+describe('CartItemComponent', () => {
     let component: ItemComponent;
     let fixture: ComponentFixture<ItemComponent>;
 
@@ -57,7 +57,7 @@ describe('ItemComponent', () => {
         expect(quantity.textContent).toContain(component.item.quantity);
     })
 
-    it('should emit the item when the remove button is clicked', () => {
+    it('should call the removeItem function when the remove button is clicked', () => {
         spyOn(component, 'removeItem');
 
         const button = fixture.nativeElement.querySelector('[aria-label="Remove '+component.item.title+' from cart"]') as HTMLButtonElement;
