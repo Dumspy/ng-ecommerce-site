@@ -14,4 +14,16 @@ export class ItemComponent {
     @Input() item!: cartItem
 
     cartService = inject(CartService)
+
+    increaseQuantity() {
+        this.cartService.setQuantity(this.item.id, this.item.quantity + 1)
+    }
+
+    decreaseQuantity() {
+        this.cartService.setQuantity(this.item.id, this.item.quantity - 1)
+    }
+
+    removeItem() {
+        this.cartService.removeItem(this.item.id)
+    }
 }

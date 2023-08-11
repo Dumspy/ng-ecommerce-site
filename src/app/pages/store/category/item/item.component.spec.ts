@@ -32,4 +32,13 @@ describe('ItemComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should call addToCart function when add to cart button is clicked', () => {
+        spyOn(component, 'addToCart');
+
+        const button = fixture.debugElement.nativeElement.querySelector(`#product${component.product.id}AddToCart`);
+        button.click();
+
+        expect(component.addToCart).toHaveBeenCalled();
+    });
 });
