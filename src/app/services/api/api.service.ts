@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from "rxjs/operators";
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 import { GetAllCategoriesResponse } from './types/get-all-categories.response';
 import { GetProductsByCategoryResponse } from './types/get-products-by-category.response';
 
@@ -15,8 +14,7 @@ const defaultHeaders = {
 })
 
 export class ApiService {
-
-    constructor(private http: HttpClient) { }
+    http = inject(HttpClient)
 
     private cache$ = new Map<string, Observable<unknown>>()
 

@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ItemComponent } from "../item/item.component";
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-cart-drawer',
@@ -21,7 +20,7 @@ import { Subscription } from 'rxjs';
             ])
         ])
     ],
-    imports: [CommonModule, BrowserAnimationsModule, ItemComponent]
+    imports: [CommonModule, ItemComponent]
 })
 export class DrawerComponent {
     cartService = inject(CartService)
