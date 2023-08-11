@@ -3,8 +3,8 @@ name: Testing
 on:
   push:
     paths:
-    - "client/**"
-    - ".github/workflows/test.yaml"
+    - "src/**"
+    - ".github/workflows/testing.yaml"
 jobs:
   test:
     runs-on: ubuntu-latest
