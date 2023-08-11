@@ -4,7 +4,7 @@ on:
   push:
     paths:
     - "src/**"
-    - ".github/workflows/testing.yaml"
+    - ".github/workflows/testing.yml"
 jobs:
   test:
     runs-on: ubuntu-latest
