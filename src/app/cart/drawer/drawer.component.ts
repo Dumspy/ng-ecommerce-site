@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ItemComponent } from "../item/item.component";
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-cart-drawer',
@@ -19,8 +20,10 @@ import { ItemComponent } from "../item/item.component";
             ])
         ])
     ],
-    imports: [CommonModule, ItemComponent]
+    imports: [CommonModule, ItemComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class DrawerComponent {
     cartService = inject(CartService)
 
@@ -36,9 +39,9 @@ export class DrawerComponent {
         return this.cartService.getQuantity()
     }
 
-    hidden = true
+    hidden$ = new BehaviorSubject<boolean>(true)
 
     toggle() {
-        this.hidden = !this.hidden
+        this.hidden$.next(!this.hidden$.getValue())
     }
 }

@@ -21,16 +21,16 @@ describe('DrawerComponent', () => {
     });
 
     it('should not display the drawer when hidden is true', () => {
-        component.hidden = true;
-        fixture.detectChanges();
+        component.hidden$.next(true)
+        fixture.detectChanges()
 
-        const drawer = fixture.nativeElement.querySelector('*');
+        const drawer = fixture.nativeElement.querySelector('*')
 
-        expect(drawer).toBeFalsy();
+        expect(drawer).toBeFalsy()
     })
 
     it('should display the drawer when hidden is false', () => {
-        component.hidden = false;
+        component.hidden$.next(false);
         fixture.detectChanges();
 
         const drawer = fixture.nativeElement.querySelector('*');

@@ -7,7 +7,7 @@
             <div class="flex flex-row">
                 <div class="flex flex-row gap-1 mr-2 items-center justify-center">
                     <button aria-label="Decrease quantity" class="w-6 h-6 bg-gray-200 text-gray-700 font-bold text-center" (click)="decreaseQuantity()">-</button>
-                    <p aria-label="Quantity" class="px-2 text-center h-6 bg-gray-200 text-gray-700 font-bold tabular-nums">{{item.quantity}}</p>
+                    <p aria-label="Quantity" class="px-2 text-center h-6 bg-gray-200 text-gray-700 font-bold tabular-nums">{{quantity | async}}</p>
                     <button aria-label="Increase quantity" id="temp" class="w-6 h-6 bg-gray-200 text-gray-700 font-bold text-center" (click)="increaseQuantity()">+</button>
                 </div>
                 <button [attr.aria-label]="'Remove '+item.title+' from cart'" (click)="removeItem()">Remove</button>

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CartService } from './cart.service';
+import { take } from 'rxjs';
 
 describe('CartService', () => {
     let service: CartService
@@ -102,6 +103,21 @@ describe('CartService', () => {
         service.removeItem(testProdct2.id)
         service.getItems().subscribe((items) => {
             expect(items.length).toBe(1)
+        })
+    })
+
+    it('should return the quantity of a product', () => {
+        service.addToCart(testProdct)
+        service.setQuantity(testProdct.id, 2)
+
+        service.getItemQuantity(testProdct.id).pipe(take(1)).subscribe((quantity) => {
+            expect(quantity).toBe(2)
+        })
+
+        service.setQuantity(testProdct.id, 10)
+
+        service.getItemQuantity(testProdct.id).pipe(take(1)).subscribe((quantity) => {
+            expect(quantity).toBe(10)
         })
     })
 

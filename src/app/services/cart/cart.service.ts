@@ -73,4 +73,13 @@ export class CartService {
     getItems() {
         return this.cart$.asObservable();
     }
+
+    getItemQuantity(id: number) {
+        return this.cart$.pipe(
+            map((items) => {
+                const item = items.find((item) => item.id === id);
+                return item ? item.quantity : 0;
+            })
+        );
+    }
 }

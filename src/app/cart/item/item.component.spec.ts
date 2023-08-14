@@ -46,17 +46,6 @@ describe('CartItemComponent', () => {
         expect(component.decreaseQuantity).toHaveBeenCalled();
     });
 
-    it('should match displayed quantity with component.item.quantity', () => {
-        const quantity = fixture.nativeElement.querySelector('[aria-label="Quantity"]') as HTMLButtonElement;
-
-        expect(quantity.textContent).toContain(component.item.quantity);
-
-        component.item.quantity = 5;
-        fixture.detectChanges();
-
-        expect(quantity.textContent).toContain(component.item.quantity);
-    })
-
     it('should call the removeItem function when the remove button is clicked', () => {
         spyOn(component, 'removeItem');
 
