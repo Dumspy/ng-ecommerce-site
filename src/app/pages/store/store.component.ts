@@ -14,9 +14,8 @@ import { Observable } from 'rxjs';
 })
 export class StoreComponent {
     categories$: Observable<string[]>
-    api = inject(ApiService)
 
-    constructor() {
+    constructor(private api : ApiService) {
         this.categories$ = this.api.getAllCategories()
     }
 }

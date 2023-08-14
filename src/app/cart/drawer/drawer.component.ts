@@ -25,7 +25,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class DrawerComponent {
-    cartService = inject(CartService)
+    constructor(private cartService: CartService) { }
 
     get total() {
         return this.cartService.getTotal()
@@ -43,5 +43,9 @@ export class DrawerComponent {
 
     toggle() {
         this.hidden$.next(!this.hidden$.getValue())
+    }
+
+    clearCart() {
+        this.cartService.clearCart()
     }
 }

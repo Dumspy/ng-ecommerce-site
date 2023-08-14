@@ -13,7 +13,7 @@ import { CartService, cartItem } from 'src/app/services/cart/cart.service';
 export class ItemComponent {
     @Input() item!: cartItem
 
-    cartService = inject(CartService)
+    constructor(private cartService: CartService) {}
 
     get quantity() {
         return this.cartService.getItemQuantity(this.item.id)
